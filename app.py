@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 Bcrypt = Bcrypt(app)
+app.config['SECRET_KEY']='8a0f946f1471e113e528d927220ad977ed8b2cce63303beff10c8cb4a15e1a99'
 app.config['sqlalchemY_DATABASE_URI']='sqlite:///notes.db'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10)
 db = SQLAlchemy(app)
@@ -12,6 +13,7 @@ class feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message_evaluation = db.Column(db.String(500), nullable=False)
     message_improvement = db.Column(db.String(500), nullable=False)
+    lab_advice = db.Column(db.String(500), nullable=False)
     teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.teacher_id'), nullable=False)
     def __repr__(self):
         return f"elavaluation: {self.message_evaluation}", "improvement: {self.message_improvement}",\
@@ -54,6 +56,9 @@ def register():
         class_name = request.form['class_name']
         hashed_password = Bcrypt.generate_password_hash(password).decode('utf-8')
         new_user = user(username=username, email=email, password=hashed_password)
+        if user.query.filter_by(username=username).scalar() is not None:
+            flash("user name exists")
+            return redirect(url_for('register'))
         db.session.add(new_user)
         db.session.commit()
         if class_name == 'student':
@@ -87,6 +92,7 @@ def add_feedback():
     if request.method == 'POST':
         message_evaluation = request.form['message_evaluation']
         message_improvement = request.form['message_improvement']
+        lab_advice = request.form['lab_advice']
         new_feedback = feedback(message_evaluation=message_evaluation, message_improvement=message_improvement)
         db.session.add(new_feedback)
         db.session.commit()

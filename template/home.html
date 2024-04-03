@@ -1,0 +1,10 @@
+<h1> This is the home page for course work for Cscb20</h1>
+<a href="login.html">click here to login</a>
+{% if session['student_id'] %}
+    <a href="grade.html">click here to logout</a>
+    <a href="submit_assignment.html">click here to submit an assignment</a>
+{% if session['teacher_id'] %}
+    <a href="regrade_request_view.html">click here to register</a>
+    <a href="grade.html">click here to grade the assignments</a>
+    <a href="feedback_view.html">click here to view feedback</a>
+{% endif %}
