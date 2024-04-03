@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
 app = Flask(__name__)
-Bcrypt = Bcrypt(app)
+bcrypt=Bcrypt(app)
+app.template_folder = 'templates'
 app.config['SECRET_KEY']='8a0f946f1471e113e528d927220ad977ed8b2cce63303beff10c8cb4a15e1a99'
-app.config['sqlalchemY_DATABASE_URI']='sqlite:///notes.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///assignment3.db'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10)
 db = SQLAlchemy(app)
 class feedback(db.Model):
@@ -14,7 +15,7 @@ class feedback(db.Model):
     message_evaluation = db.Column(db.String(500), nullable=False)
     message_improvement = db.Column(db.String(500), nullable=False)
     lab_advice = db.Column(db.String(500), nullable=False)
-    teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.teacher_id'), nullable=False)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     def __repr__(self):
         return f"elavaluation: {self.message_evaluation}", "improvement: {self.message_improvement}",\
                 "improvement aspects: {self.message_improvement}"
@@ -22,15 +23,14 @@ class grade(db.Model):
     __tablename__ = 'grade'
     id = db.Column(db.Integer, primary_key=True)
     grade = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 class user(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    class_name = db.Column(db.String(100), nullable=False)
     grade = db.relationship('grade', backref='user', lazy=True)
-    feedback = db.relationship('feedback', backref='user', lazy=True)
 class regrade_request(db.Model):
     __tablename__ = 'regrade_request'
     id = db.Column(db.Integer, primary_key=True)
@@ -38,12 +38,6 @@ class regrade_request(db.Model):
     email = db.Column(db.String(100), nullable=False)
     message = db.Column(db.String(500), nullable=False)
     grade_id = db.Column(db.Integer, db.ForeignKey('grade.id'), nullable=False)
-class student(db.Model):
-    __tablename__ = 'student'
-    student_id = db.Column(db.Integer, primary_key=True)
-class teacher(db.Model):
-    __tablename__ = 'teacher'
-    teacher_id = db.Column(db.Integer, primary_key=True)
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -51,24 +45,15 @@ def home():
 def register():
     if request.method == 'POST':
         username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
+        thispassword = request.form['password']
         class_name = request.form['class_name']
-        hashed_password = Bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = user(username=username, email=email, password=hashed_password)
+        hashed_password = bcrypt.generate_password_hash(thispassword).decode('utf-8')
+        new_user = user(username=username, password=hashed_password, class_name=class_name)
         if user.query.filter_by(username=username).scalar() is not None:
             flash("user name exists")
             return redirect(url_for('register'))
         db.session.add(new_user)
         db.session.commit()
-        if class_name == 'student':
-            new_student = student(student_id=new_user.id)
-            db.session.add(new_student)
-            db.session.commit()
-        if class_name == 'teacher':
-            new_teacher = teacher(teacher_id=new_user.id)
-            db.session.add(new_teacher)
-            db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html')
 @app.route('/login', methods=['GET', 'POST'])
@@ -79,7 +64,7 @@ def login():
         user = user.query.filter_by(username=username).first()
         if user:
             if Bcrypt.check_password_hash(user.password, password):
-                if db.session.query(student).filter_by(student_id=user.id).scalar() is not None:
+                if user.class_name == 'student':
                     session['student_id'] = user.id
                 else :
                     session['teacher_id'] = user.id
@@ -154,7 +139,7 @@ def regrade_request_delete(regrade_request_id):
     regrade_request.query.filter_by(id=regrade_request_id).delete()
     db.session.commit()
     return redirect(url_for('regrade_request_view'))
-@app.route('feeedback_view', methods=['GET'])
+@app.route('/feeedback_view', methods=['GET'])
 def feedback_view():
     if session.get('teacher_id') is None:
         return redirect(url_for('home'))
