@@ -1,0 +1,22 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lato", sans-serif;
+}
+
+.bar,
+h1,
+button {
+  font-family: "Montserrat", sans-serif;
+}
+.fa-anchor:before {
+  content: "\f13d";
+}
+
+.fa-coffee:before {
+  content: "\f0f4";
+}
