@@ -7,6 +7,7 @@
 .bar-item {
   text-align: center;
 }
+
 .blue-grey,
 .hover-blue-grey:hover,
 .blue-gray,
@@ -47,6 +48,15 @@
   width: 100%;
   z-index: 1;
 }
+.margin {
+  margin: 16px !important;
+}
+.jumbo {
+  font-size: 64px !important;
+}
+.xlarge {
+  font-size: 24px !important;
+}
 
 .right {
   float: right !important;
@@ -59,6 +69,10 @@
 .hover-white:hover {
   color: #000 !important;
   background-color: #fff !important;
+}
+
+.container {
+  padding: 0.01em 16px;
 }
 
 @media (max-width: 992px) and (min-width: 601px) {

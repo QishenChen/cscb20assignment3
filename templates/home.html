@@ -13,31 +13,14 @@
 </head>
   <body>
 
-<!--navbar-->
-<div class="top">
-  <div class="bar blue-grey card left-align large">
-    <a class="bar-item button hide-medium hide-large right padding-large hover-white large blue-grey" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="bar-item button padding-large white">Home</a>
-    <a href="#" class="bar-item button padding-large hover-white">Feedback</a>
-    <a href="login.html" class="bar-item button padding-large hover-white">Login</a>
-    <a href="register.html" class="bar-item button padding-large hover-white">Register</a>
-  </div>
-  <!--navbar small screen-->
-  <div id="navDemo" class="bar-block white hide hide-large hide-medium large">
-    <a href="#" class="bar-item button padding-large">Home</a>
-    <a href="#" class="bar-item button padding-large">Feedback</a>
-    <a href="login.html" class="bar-item button padding-large">Login</a>
-    <a href="register.html" class="bar-item button padding-large ">Register</a>
-  </div>
-</div>
-<!--navbar ends-->
+
 
 <!--header-->
-<header class="container blue-grey center" style="padding:128px 16px">
+<header class="container blue-grey center" style="padding:250px 16px">
 <h1 class="margin jumbo">CSCB20</h1>
 <p class="xlarge">Introduction to Database and Web Development</p>
-<a href="login" class="bar-item button padding-large hover-white">Login</a>
-<a href="register" class="bar-item button padding-large hover-white">Register</a>
+<a href="login" class="bar-item button padding-large hover-white xlarge">Login</a>
+<a href="register" class="bar-item button padding-large hover-white xlarge">Register</a>
 {% if session['student_id'] %}
     <a href="grade">click here to logout</a>
     <a href="submit_assignment">click here to submit an assignment</a>
