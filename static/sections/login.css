@@ -1,0 +1,43 @@
+/* Styling for the login form */
+.login-form {
+  margin: 0 auto; /* Center the form horizontally */
+  max-width: 500px; /* Set a wider maximum width for the form */
+  padding: 20px 40px; /* Add padding to the form */
+  background-color: #fff; /* Background color */
+  border: 1px solid #ddd; /* Border */
+  border-radius: 5px; /* Border radius */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+.login-form h1 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px; /* Add bottom margin to the heading */
+}
+
+.login-form label {
+  display: block; /* Display labels as block elements */
+  margin-bottom: 10px; /* Add bottom margin to labels */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: calc(100% - 20px); /* Set input width to 100% minus the padding */
+  padding: 10px; /* Add padding to inputs */
+  margin-bottom: 20px; /* Add bottom margin to inputs */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 3px; /* Border radius */
+}
+
+.login-form input[type="submit"] {
+  width: 100%; /* Set submit button width to 100% */
+  padding: 10px; /* Add padding to submit button */
+  background-color: #333; /* Background color */
+  color: #fff; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 3px; /* Border radius */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.login-form input[type="submit"]:hover {
+  background-color: #555; /* Background color on hover */
+}

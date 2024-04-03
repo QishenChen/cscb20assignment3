@@ -4,16 +4,31 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login Page</title>
+        <link rel="stylesheet" href="../static/components/home.css">
+        <link rel="stylesheet" href="../static/components/buttons.css">
+        <link rel="stylesheet" href="../static/components/fonts/lato.css">
+        <link rel="stylesheet" href="../static/components/fonts/Montserrat.css">
+        <link rel="stylesheet" href="../static/components/fonts/morefont.css">
+        <link rel="stylesheet" href="../static/sections/main.css">
+        <link rel="stylesheet" href="../static/sections/login.css">
+        
     </head>
+    <!--header-->
+<header class="xlarge container-top" style="padding:35px">
+    <span>Introduction to Web Development and database</span>
+  </header>
 <body>
-        <h1>Login Page</h1>
-        <form id="form_to_submit" action="http://127.0.0.1:5000/login" method="post">
-            <label for="username">Username</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password"><br>
-            <input type="submit" value="Login">
+    <header class="container blue-grey center" style="padding:250px 16px">
+        <h1 class="margin jumbo">CSCB20</h1>
+        <h1 class="margin jumbo">Login Page</h1>
+        <form id="form_to_submit" action="http://127.0.0.1:5000/login" method="post" class="login-form">
+            <label for="username" class="xxlarge">Username</label><br>
+            <input type="text" id="username" name="username" class="xxlarge"><br>
+            <label for="password" class="xxlarge">Password</label><br>
+            <input type="password" id="password" name="password" class="xxlarge"><br>
+            <input type="submit" value="Login" class="xxlarge">
         </form>
+    </header>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -53,4 +68,8 @@
             });
         </script>
 </body>
+<footer>
+    <a href="https://web.cs.toronto.edu" class="xlarge">Faculty of Computer Science at UofT</a>
+    <p class="xlarge">Site design by Qishen Chen, Luna Bertha</p>
+  </footer>
 </html>

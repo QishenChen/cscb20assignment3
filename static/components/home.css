@@ -2,8 +2,8 @@
   position: fixed;
   width: calc(100%); /* Adjust the margin value as needed */
   background-color: #333;
-  color: white;
   text-align: center;
+  color: #ddd;
   z-index: 1000;
   margin-top: 0; /* No top margin */
   margin-right: 20px; /* Right margin */
@@ -13,6 +13,9 @@
 }
 .main {
   padding-top: 50px;
+}
+.username {
+  color: #333;
 }
 
 .dark-blue {
@@ -74,7 +77,7 @@
 .hover-blue-grey:hover,
 .blue-gray,
 .hover-blue-gray:hover {
-  color: #fff;
+  color: #1f205c;
   background-color: #607d8b;
 }
 
