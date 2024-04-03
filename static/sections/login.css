@@ -41,3 +41,54 @@
 .login-form input[type="submit"]:hover {
   background-color: #555; /* Background color on hover */
 }
+
+/* Add this CSS to your existing CSS file */
+
+/* Styling for the select element */
+/* Add this CSS to your existing CSS file */
+
+/* Styling for the select element */
+.login-form select {
+  width: calc(100% - 20px); /* Set select width to 100% minus the padding */
+  padding: 10px; /* Add padding to select */
+  margin-bottom: 20px; /* Add bottom margin to select */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 3px; /* Border radius */
+  background-color: #fff; /* Background color */
+  color: #555; /* Text color */
+  font-size: 16px; /* Font size */
+}
+
+/* Styling for the select options */
+.login-form select option {
+  background-color: #fff; /* Background color */
+  color: #555; /* Text color */
+  font-size: 16px; /* Font size */
+}
+
+/* Styling for the select when expanded */
+.login-form select:focus {
+  font-size: 16px; /* Adjust font size when select is focused */
+}
+.login-form select option[value="student"] {
+  width: calc(100% - 20px); /* Set select width to 100% minus the padding */
+  padding: 10px; /* Add padding to select */
+  margin-bottom: 20px; /* Add bottom margin to select */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 3px; /* Border radius */
+  background-color: #fff; /* Background color */
+  color: #555; /* Text color */
+  font-size: 16px; /* Font size */
+}
+
+/* Styling for the select options for teacher */
+.login-form select option[value="teacher"] {
+  width: calc(100% - 20px); /* Set select width to 100% minus the padding */
+  padding: 10px; /* Add padding to select */
+  margin-bottom: 20px; /* Add bottom margin to select */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 3px; /* Border radius */
+  background-color: #fff; /* Background color */
+  color: #555; /* Text color */
+  font-size: 16px; /* Font size */ /* White text color for teacher option */
+}

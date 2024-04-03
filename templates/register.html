@@ -1,12 +1,83 @@
-<h1> registration page</h1>
-<form id="form_to_submit" action="http://127.0.0.1:5000/register" method="post">
-    <label>username</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label>password</label>
-    <input type="text" id="password" name="password"><br>
-    <input type="submit">
-</form>
-<select name="class_name" form="form_to_submit">
-    <option value="student">student</option>
-    <option value="teacher">teacher</option>
-</select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="../static/components/home.css">
+    <link rel="stylesheet" href="../static/components/buttons.css">
+    <link rel="stylesheet" href="../static/components/fonts/lato.css">
+    <link rel="stylesheet" href="../static/components/fonts/Montserrat.css">
+    <link rel="stylesheet" href="../static/components/fonts/morefont.css">
+    <link rel="stylesheet" href="../static/sections/main.css">
+    <link rel="stylesheet" href="../static/sections/login.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="xlarge container-top" style="padding:35px">
+        <span>Introduction to Web Development and Database</span>
+    </header>
+
+    <!-- Registration Form -->
+    <header class="container blue-grey center" style="padding:250px 16px">
+        <h1 class="margin jumbo">CSCB20</h1>
+        <h1 class="margin jumbo">Registration Page</h1>
+        <form id="form_to_submit" action="http://127.0.0.1:5000/register" method="post" class="login-form">
+            <label for="username" class="xxlarge">New Username</label><br>
+            <input type="text" id="username" name="username" class="xxlarge"><br>
+            <label for="password" class="xxlarge">New Password</label><br>
+            <input type="password" id="password" name="password" class="xxlarge"><br>
+            <select name="class_name" form="form_to_submit" class="xxlarge">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select><br>
+            <input type="submit" value="Register" class="xxlarge">
+        </form>
+    </header>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('form_to_submit');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+
+                // Create a new FormData object and append username and password
+                var formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+
+                // Send a POST request to the server
+                fetch('http://127.0.0.1:5000/register', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // If registration is successful, redirect or show a success message
+                        window.location.href = '/'; // Redirect to home page
+                    } else {
+                        // If registration fails, display an error message
+                        alert('Registration failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle any errors that occur during the fetch operation
+                    alert('An error occurred while trying to register. Please try again later.');
+                });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <a href="https://web.cs.toronto.edu" class="xlarge">Faculty of Computer Science at UofT</a>
+        <p class="xlarge">Site design by Qishen Chen, Luna Bertha</p>
+    </footer>
+</body>
+</html>
