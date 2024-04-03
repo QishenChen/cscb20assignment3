@@ -17,7 +17,7 @@ class feedback(db.Model):
     lab_advice = db.Column(db.String(500), nullable=False)
     teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     def __repr__(self):
-        return f"elavaluation: {self.message_evaluation}", "improvement: {self.message_improvement}",\
+        return f"evaluation: {self.message_evaluation}", "improvement: {self.message_improvement}",\
                 "improvement aspects: {self.message_improvement}"
 class grade(db.Model):
     __tablename__ = 'grade'
@@ -38,9 +38,11 @@ class regrade_request(db.Model):
     email = db.Column(db.String(100), nullable=False)
     message = db.Column(db.String(500), nullable=False)
     grade_id = db.Column(db.Integer, db.ForeignKey('grade.id'), nullable=False)
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -50,10 +52,11 @@ def register():
         hashed_password = bcrypt.generate_password_hash(thispassword).decode('utf-8')
         new_user = user(username=username, password=hashed_password, class_name=class_name)
         if user.query.filter_by(username=username).scalar() is not None:
-            flash("user name exists")
+            flash("Username already exists")
             return redirect(url_for('register'))
         db.session.add(new_user)
         db.session.commit()
+        flash("Registration successful. Please log in.")
         return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -69,9 +72,14 @@ def login():
                     session['student_id'] = logged_user.id
                 else :
                     session['teacher_id'] = logged_user.id
-                return redirect(url_for('home'))
+                return redirect(url_for('mainpage'))
         flash("Invalid username or password")
     return render_template('login.html')
+
+@app.route('/mainpage')
+def mainpage():
+    # Define your main page functionality here
+    return render_template('mainpage.html')
 
 @app.route('/feedback', methods=['GET', 'POST'])
 def add_feedback():
