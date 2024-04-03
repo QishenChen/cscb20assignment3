@@ -56,22 +56,23 @@ def register():
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = user.query.filter_by(username=username).first()
-        if user:
-            if Bcrypt.check_password_hash(user.password, password):
-                if user.class_name == 'student':
-                    session['student_id'] = user.id
+        logged_user = user.query.filter_by(username=username).first()
+        if logged_user:
+            if bcrypt.check_password_hash(logged_user.password, password):
+                if logged_user.class_name == 'student':
+                    session['student_id'] = logged_user.id
                 else :
-                    session['teacher_id'] = user.id
+                    session['teacher_id'] = logged_user.id
                 return redirect(url_for('home'))
-        else:
-            return redirect(url_for('login'))
+        flash("Invalid username or password")
     return render_template('login.html')
+
 @app.route('/feedback', methods=['GET', 'POST'])
 def add_feedback():
     if request.method == 'POST':

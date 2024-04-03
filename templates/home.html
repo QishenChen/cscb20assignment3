@@ -9,28 +9,35 @@
   <link rel="stylesheet" href="../static/components/fonts/lato.css">
   <link rel="stylesheet" href="../static/components/fonts/Montserrat.css">
   <link rel="stylesheet" href="../static/components/fonts/morefont.css">
-  <link rel="stylesheet" href="../static/sections/home.css">
+  <link rel="stylesheet" href="../static/sections/main.css">
 </head>
   <body>
 
-  <!--navbar-->
+<!--navbar-->
 <div class="top">
   <div class="bar blue-grey card left-align large">
     <a class="bar-item button hide-medium hide-large right padding-large hover-white large blue-grey" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="#" class="bar-item button padding-large white">Home</a>
-    <a href="#" class="bar-item button padding-large white">Feedback</a>
-    <a href="login.html" class="bar-item button padding-large white">Login</a>
-    <a href="register.html" class="bar-item button padding-large white">Register</a>
+    <a href="#" class="bar-item button padding-large hover-white">Feedback</a>
+    <a href="login.html" class="bar-item button padding-large hover-white">Login</a>
+    <a href="register.html" class="bar-item button padding-large hover-white">Register</a>
+  </div>
+  <!--navbar small screen-->
+  <div id="navDemo" class="bar-block white hide hide-large hide-medium large">
+    <a href="#" class="bar-item button padding-large">Home</a>
+    <a href="#" class="bar-item button padding-large">Feedback</a>
+    <a href="login.html" class="bar-item button padding-large">Login</a>
+    <a href="register.html" class="bar-item button padding-large ">Register</a>
   </div>
 </div>
+<!--navbar ends-->
 
-
-
-
-
-<h1> This is the home page for course work for Cscb20</h1>
-<a href="login">click here to login</a>
-<a href="register">click here to register</a>
+<!--header-->
+<header class="container blue-grey center" style="padding:128px 16px">
+<h1 class="margin jumbo">CSCB20</h1>
+<p class="xlarge">Introduction to Database and Web Development</p>
+<a href="login" class="bar-item button padding-large hover-white">Login</a>
+<a href="register" class="bar-item button padding-large hover-white">Register</a>
 {% if session['student_id'] %}
     <a href="grade">click here to logout</a>
     <a href="submit_assignment">click here to submit an assignment</a>
@@ -39,5 +46,11 @@
     <a href="grade">click here to grade the assignments</a>
     <a href="feedback_view">click here to view feedback</a>
 {% endif %}
-  </body>
+</header>
+
+<body>
+<h1> This is the home page or coursework for CSCB20</h1>
+<p class="xlarge">Click the login or Register button above to proceed and view the content!</p>
+
+</body>
 </html>
