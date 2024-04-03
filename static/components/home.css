@@ -1,3 +1,65 @@
+.container-top {
+  position: fixed;
+  width: calc(100%); /* Adjust the margin value as needed */
+  background-color: #333;
+  color: white;
+  text-align: center;
+  z-index: 1000;
+  margin-top: 0; /* No top margin */
+  margin-right: 20px; /* Right margin */
+  overflow: hidden;
+  top: 0;
+  padding: 20px;
+}
+.main {
+  padding-top: 50px;
+}
+
+.dark-blue {
+  background-color: #333;
+  color: #fff;
+}
+.tiny {
+  font-size: 10px !important;
+}
+.small {
+  font-size: 12px !important;
+}
+.medium {
+  font-size: 15px !important;
+}
+.large {
+  font-size: 18px !important;
+}
+.xlarge {
+  font-size: 24px !important;
+}
+.xxlarge {
+  font-size: 36px !important;
+}
+.xxxlarge {
+  font-size: 48px !important;
+}
+.jumbo {
+  font-size: 64px !important;
+}
+.margin {
+  margin: 16px !important;
+}
+.margin-top {
+  margin-top: 16px !important;
+}
+.margin-bottom {
+  margin-bottom: 16px !important;
+}
+.margin-left {
+  margin-left: 16px !important;
+}
+
+.margin-right {
+  margin-right: 16px !important;
+}
+
 .bar {
   width: 100%;
   overflow: hidden;
@@ -149,4 +211,30 @@
   .sidebar.collapse {
     display: block !important;
   }
+}
+
+/* Footer styles */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+#showcase {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 40px;
+}
+
+#course_desc,
+#instructor {
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+#instructor {
+  text-align: center;
 }
