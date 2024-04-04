@@ -40,6 +40,7 @@ class regrade_request(db.Model):
     grade_id = db.Column(db.Integer, db.ForeignKey('grade.id'), nullable=False)
 
 @app.route('/')
+@app.route('/home')
 def home():
     return render_template('home.html')
 

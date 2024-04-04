@@ -46,12 +46,12 @@
 
                 var username = document.getElementById('username').value;
                 var password = document.getElementById('password').value;
-
+                var class_name = document.getElementById('class_name').value;
                 // Create a new FormData object and append username and password
                 var formData = new FormData();
                 formData.append('username', username);
                 formData.append('password', password);
-
+                formData.append('class_name', class_name);
                 // Send a POST request to the server
                 fetch('http://127.0.0.1:5000/register', {
                     method: 'POST',

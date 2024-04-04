@@ -25,7 +25,7 @@
 <a href="login" class="dark-blue bar-item button padding-large hover-white xlarge">Login</a>
 <a href="register" class="dark-blue bar-item button padding-large hover-white xlarge">Register</a>
 {% if session['student_id'] %}
-    <a href="grade">click here to logout</a>
+    <a href="logout">click here to logout</a>
     <a href="submit_assignment">click here to submit an assignment</a>
 {% elif session['teacher_id'] %}
     <a href="regrade_request_view">click here to register</a>
