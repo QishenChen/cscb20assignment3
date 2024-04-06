@@ -73,7 +73,7 @@ def login():
                     session['student_id'] = logged_user.id
                 else :
                     session['teacher_id'] = logged_user.id
-                return redirect(url_for('mainpage'))
+                return redirect(url_for('feedback'))
         flash("Invalid username or password")
     return render_template('login.html')
 
