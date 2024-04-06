@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CSCB20 Course Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../static/sections/sidebar.css">
+  <link rel="stylesheet" href="../static/components/buttons.css">
+
+</head>
+
+<!--header-->
+<header class="container top blue-grey xlarge padding">
+    <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+    <span><b>Introduction to Web Development</b></span>
+</header>
+
+  <!--Sidebar-->
+  <nav class="sidebar blue-grey collapse top large padding" style="z-index:3;width:300px;font-weight:bold;margin-top:60px" id="mySidebar"><br>
+    <a href="javascript:void(0)" onclick="close_sidebar();" class="button hide-large display-topleft" style="width:100%;font-size: 22px">Close Menu</a>
+        <div class="container">
+            <h3 class="padding-32 xxlarge"><b>Content List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="#" onclick="close_sidebar()" class="xlarge bar-item button hover-white">Home</a>
+            <a href="https://piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="xlarge bar-item button hover-white">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="xlarge bar-item button hover-white">MarkUs</a>
+            <a href="Assignments.html" class="xlarge bar-item button hover-white">Assignments</a>
+            <a href="lectureslides.html" rel="slides" type="text/html" class="xlarge bar-item button hover-white">Slides</a>
+            <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
+            <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
+            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
+            <a href="feedback.html" class="xlarge bar-item button hover-white">Anon Feedback</a>
+            <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
+        </div>
+        </nav>
+
+<body>
+<!--small screen header open sidebar-->
+    <header class="container top hide-large blue-grey xlarge padding">
+        <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+        <span><b>Content List</b></span>
+    </header>
+<!--small screen sidebar overlay content-->
+    <div class="overlay hide-large" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!--MAIN CONTENT-->        
+        <div class="main" style="margin-left:300px; margin-top:40px ">
+            <!--Header-->
+            <div class="container blue-grey center" style="padding:150x">
+                <h1 class="margin jumbo"><b>CSCB20</b></h1>
+                <h1 class="xxxlarge text-indigo"><b>Course Website</b>
+                </h1>
+                
+                <p class="xlarge">Welcome,{{Student ID}}! </p>
+            <!--view grades btn-->
+        <a class="xlarge custom-btn btn-1" href="grade.html">View Grades</a>
+            </div>
+            
+        </div>
+
+
+  <div class="main" id="course_desc" style="margin-left:330px">
+      <h1 class="xxlarge center"><b>Course Description</b></h1>
+      <hr class="round">
+      <p class="xlarge">A practical introduction to databases and Web app development. Databases: terminology and applications;
+          creating, querying and updating databases; the entity-relationship model for database design. Web
+          documents
+          and applications: static and interactive documents; Web servers and dynamic server-generated content;
+          Web
+          application development and interface with databases.
+      </p>
+      <p class="xlarge"><strong>Prerequisite</strong> Some experience with programming in an imperative language such as Python,
+          Java
+          or C.
+      </p>
+      <p class="xlarge"><strong>Exclusion</strong> This course may not be taken after - or concurrently with - any C- or D-level
+          CSC
+          course.
+      </p>
+
+      <p class="xlarge"><strong>Syllabus</strong> <a href="http://www.utsc.utoronto.ca/bretscher/b20/syllabus.pdf">PDF</a></p>
+  </div>
+  <!-- Instructors -->
+  <div class="main xlarge" id="instructor" style="margin-left:320px">
+      <h1 class="big-1"><b>Instructor</b></h1>
+      <hr class="round">
+      <h2 class="big-2">Dr. Purva Gawde</h2>
+      <p><b>E-mail:</b> purva.gawde@utoronto.ca</p>
+      <p><b>Phone:</b> 647.601.4658</p>
+      <p><b>Office:</b> IC 484</p>
+      <p><b>Lectures:</b> Mondays 9:00 - 11.00 AM in SW 319</p>
+  </div>
+
+  <footer class="main container xlarge blue-grey center" style="margin-left:300px">
+    <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+    <p>Site design by Qishen Chen, Luna Bertha</p>
+  </footer>
+
+  <script>
+    function open_sidebar() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function close_sidebar() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
