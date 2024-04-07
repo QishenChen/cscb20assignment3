@@ -10,16 +10,35 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///assignment3.db'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10)
 db = SQLAlchemy(app)
 
-class feedback(db.Model):
+class Feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True)
     message_evaluation = db.Column(db.String(500), nullable=False)
     message_improvement = db.Column(db.String(500), nullable=False)
     lab_advice = db.Column(db.String(500), nullable=False)
     teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
     def __repr__(self):
-        return f"evaluation: {self.message_evaluation}", "improvement: {self.message_improvement}",\
-                "improvement aspects: {self.message_improvement}"
+        return f"Feedback(id={self.id}, evaluation={self.message_evaluation}, improvement={self.message_improvement}, lab_advice={self.lab_advice})"
+
+@app.route('/feedback', methods=['GET', 'POST'])
+def add_feedback():
+    if request.method == 'POST':
+        message_evaluation = request.form['message_evaluation']
+        message_improvement = request.form['message_improvement']
+        lab_advice = request.form['lab_advice']
+        new_feedback = Feedback(message_evaluation=message_evaluation, message_improvement=message_improvement, lab_advice=lab_advice, teacher_id=session.get('teacher_id'))
+        db.session.add(new_feedback)
+        db.session.commit()
+        return redirect(url_for('add_feedback'))
+    return render_template('feedback.html')
+
+@app.route('/feedback_view', methods=['GET'])
+def feedback_view():
+    if session.get('teacher_id') is None:
+        return redirect(url_for('home'))
+    feedback_entries = Feedback.query.filter_by(teacher_id=session.get('teacher_id')).all()
+    return render_template('feedback_view.html', feedback_entries=feedback_entries)
 
 class grade(db.Model):
     __tablename__ = 'grade'
@@ -164,7 +183,7 @@ def regrade_request_delete(regrade_request_id):
     db.session.commit()
     return redirect(url_for('regrade_request_view'))
 
-@app.route('/feeedback_view', methods=['GET'])
+@app.route('/feedback_view', methods=['GET'])
 def feedback_view():
     if session.get('teacher_id') is None:
         return redirect(url_for('home'))
