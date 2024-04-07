@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grades</title>
+    <title>Change Grades</title>
     <link rel="stylesheet" href="../static/sections/sidebar.css">
     <link rel="stylesheet" href="../static/components/buttons.css">
     <link rel="stylesheet" href="../static/sections/grade.css">
-
 </head>
 <body>
-    <!--header-->
+    <!-- Header -->
     <header class="container top blue-grey xlarge padding">
         <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
         <span><b>Introduction to Web Development</b></span>
     </header>
 
-    <!--Sidebar-->
-    <nav class="sidebar blue-grey collapse top large padding" style="z-index:3;width:300px;font-weight:bold;margin-top:60px" id="mySidebar"><br>
+    <!-- Sidebar -->
+    <nav class="sidebar blue-grey collapse top large padding" style="z-index:3;width:300px;font-weight:bold;margin-top:60px" id="mySidebar">
+        <br>
         <a href="javascript:void(0)" onclick="close_sidebar();" class="button hide-large display-topleft" style="width:100%;font-size: 22px">Close Menu</a>
         <div class="container">
             <h3 class="padding-32 xxlarge"><b>Content List</b></h3>
@@ -36,54 +36,50 @@
         </div>
     </nav>
 
-    <!--small screen header open sidebar-->
+    <!-- Small screen header open sidebar -->
     <header class="container top hide-large blue-grey xlarge padding">
         <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
         <span><b>Content List</b></span>
     </header>
 
-    <!--small screen sidebar overlay content-->
+    <!-- Small screen sidebar overlay content -->
     <div class="overlay hide-large" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-    <!--MAIN CONTENT-->
+    <!-- Main content -->
     <div class="main" style="margin-left:300px; margin-top:40px">
-        <!--Header-->
-        <div class="container blue-grey center" style="padding:100px">
-            <h1 class="margin jumbo"><b>CSCB20</b></h1>
-            <h1 class="xxxlarge text-indigo"><b>Course Website</b></h1>
-            <p class="xlarge">Welcome, {{ student_id }}!</p>
-
-           </div>
-
         <!-- Grades Table -->
-        <table id="grades-table" style="margin: left 300px;">
+        <table id="grades-table">
             <thead>
                 <tr>
+                    <th>Student ID</th>
                     <th>Assignment Type</th>
                     <th>Grade</th>
-                    <th>Actions</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for grade in grades %}
                 <tr>
+                    <td>{{ grade.student_id }}</td>
                     <td>{{ grade.assignment_type }}</td>
                     <td>{{ grade.grade }}</td>
                     <td>
-                        {% if not grade.remark_request %}
-                        <form action="{{ url_for('regrade_request', grade_id=grade.id) }}" method="post">
-                            <input type="submit" value="Submit Remark Request" class="xlarge custom-btn btn-2">
-                            <textarea name="remark_request_reason" placeholder="Explain why you are requesting a remark" class="xlarge"></textarea>
+                        <form action="{{ url_for('change_grade', grade_id=grade.id) }}" method="post">
+                            <input type="text" name="new_grade" placeholder="New Grade">
+                            <input type="submit" value="Update">
                         </form>
-                        {% else %}
-                        <p>Remark request submitted</p>
-                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+        <!-- Footer -->
+        <footer class="main container xlarge blue-grey center" style="margin-top:800px; margin-left: 300px;">
+            <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+            <p>Site design by Qishen Chen, Luna Bertha</p>
+        </footer>
+    
 
     <script>
         function open_sidebar() {
@@ -94,11 +90,6 @@
         function close_sidebar() {
             document.getElementById("mySidebar").style.display = "none";
             document.getElementById("myOverlay").style.display = "none";
-        }
-
-        function openGrades() {
-            var table = document.getElementById("grades-table");
-            table.classList.toggle("hide");
         }
     </script>
 </body>

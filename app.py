@@ -121,7 +121,7 @@ def add_grade():
         new_grade = grade(grade=grade, user_id=student_id)
         db.session.add(new_grade)
         db.session.commit()
-        return redirect(url_for('add_grade'))
+        return redirect(url_for('change_grade'))
     return render_template('grade.html')
 
 @app.route('/regrade_request/<grade_id>/', methods=['GET', 'POST'])
@@ -148,12 +148,14 @@ def change_grade():
         db.session.commit()
         return redirect(url_for('change_grade'))
     return render_template('change_grade.html')
+
 @app.route('/regrade_request_view', methods=['GET'])
 def regrade_request_view():
     if session.get('teacher_id') is None:
         return redirect(url_for('home'))
     regrade_request=regrade_request.query.all()
     return render_template('regrade_request_view.html', regrade_request=regrade_request)
+
 @app.route('/regrade_request_delete/<regrade_request_id>', methods=['GET'])
 def regrade_request_delete(regrade_request_id):
     if session.get('teacher_id') is None:
@@ -161,15 +163,19 @@ def regrade_request_delete(regrade_request_id):
     regrade_request.query.filter_by(id=regrade_request_id).delete()
     db.session.commit()
     return redirect(url_for('regrade_request_view'))
+
 @app.route('/feeedback_view', methods=['GET'])
 def feedback_view():
     if session.get('teacher_id') is None:
         return redirect(url_for('home'))
     feedback=feedback.query.filter_by(teacher_id=session.get('teacher_id')).all()
     return render_template('feedback_view.html', feedback=feedback)
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
