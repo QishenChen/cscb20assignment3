@@ -1,0 +1,24 @@
+#grades-table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#grades-table th,
+#grades-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#grades-table th {
+  background-color: #f2f2f2;
+}
+
+#grades-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#grades-table tr:hover {
+  background-color: #ddd;
+}

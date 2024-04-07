@@ -1,0 +1,71 @@
+/* Feedback Form Styles */
+.form {
+  background: rgba(40, 72, 96, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.form label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+}
+
+.form input[type="text"] {
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(132, 85, 85, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.form input[type="text"]:focus {
+  outline: none;
+  border-color: #236b58;
+}
+
+.form .field-wrap {
+  margin-bottom: 20px;
+}
+
+.form .top-row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.form .top-row > .field-wrap {
+  width: auto;
+  margin-right: 20px;
+  float: left;
+}
+
+.form input[type="submit"] {
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: #1a4ab1;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  margin-bottom: auto;
+}
+
+.form input[type="submit"]:hover {
+  background: #0e5d7a;
+}
+
+.form input[type="submit"]:focus {
+  background: #0e3f7a;
+}

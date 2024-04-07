@@ -9,6 +9,7 @@ app.config['SECRET_KEY']='8a0f946f1471e113e528d927220ad977ed8b2cce63303beff10c8c
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///assignment3.db'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10)
 db = SQLAlchemy(app)
+
 class feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True)
@@ -19,11 +20,16 @@ class feedback(db.Model):
     def __repr__(self):
         return f"evaluation: {self.message_evaluation}", "improvement: {self.message_improvement}",\
                 "improvement aspects: {self.message_improvement}"
+
 class grade(db.Model):
     __tablename__ = 'grade'
     id = db.Column(db.Integer, primary_key=True)
-    grade = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    assignment_type = db.Column(db.String(100), nullable=False)  # Type of assignment (e.g., assignment, lab, midterm, final)
+    grade = db.Column(db.String(100), nullable=False)
+    remark_request = db.Column(db.Boolean, default=False)  # True if remark request has been submitted
+    remark_request_reason = db.Column(db.Text)  # Explanation for the remark request
+
 class user(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -31,6 +37,7 @@ class user(db.Model):
     password = db.Column(db.String(100), nullable=False)
     class_name = db.Column(db.String(100), nullable=False)
     grade = db.relationship('grade', backref='user', lazy=True)
+
 class regrade_request(db.Model):
     __tablename__ = 'regrade_request'
     id = db.Column(db.Integer, primary_key=True)
@@ -38,6 +45,7 @@ class regrade_request(db.Model):
     email = db.Column(db.String(100), nullable=False)
     message = db.Column(db.String(500), nullable=False)
     grade_id = db.Column(db.Integer, db.ForeignKey('grade.id'), nullable=False)
+
 
 @app.route('/')
 @app.route('/home')
@@ -93,6 +101,7 @@ def add_feedback():
         db.session.commit()
         return redirect(url_for('add_feedback'))
     return render_template('feedback.html')
+
 @app.route('/grade_view', methods=['GET', 'POST'])
 def view_grade():
     if request.method=='GET':
@@ -100,6 +109,7 @@ def view_grade():
             return redirect(url_for('home'))
         student_grade=grade.query.filter_by(id=session.get('student_id')).first()
         return render_template('grade_view.html', student_grade=student_grade)
+
 @app.route('/grade', methods=['GET', 'POST'])
 def add_grade():
     if request.method == 'POST':
@@ -125,6 +135,8 @@ def regrade_request(grade_id):
         db.session.commit()
         return redirect(url_for('regrade_request'))
     return render_template('regrade_request.html',grade_id=grade_id)
+
+
 @app.route('/change_grade/<grade_id>', methods=['GET', 'POST'])
 def change_grade():
     if request.method == 'POST':

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regrade Request</title>
+    <link rel="stylesheet" href="../static/sections/sidebar.css">
+    <link rel="stylesheet" href="../static/components/buttons.css">
+    <link rel="stylesheet" href="../static/sections/regrade_request.css">
+</head>
+<body>
+    <!--header-->
+    <header class="container top blue-grey xlarge padding">
+        <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+        <span><b>Introduction to Web Development</b></span>
+    </header>
+
+    <!--Sidebar-->
+    <nav class="sidebar blue-grey collapse top large padding" style="z-index:3;width:300px;font-weight:bold;margin-top:60px" id="mySidebar"><br>
+        <a href="javascript:void(0)" onclick="close_sidebar();" class="button hide-large display-topleft" style="width:100%;font-size: 22px">Close Menu</a>
+        <div class="container">
+            <h3 class="padding-32 xxlarge"><b>Content List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="#" onclick="close_sidebar()" class="xlarge bar-item button hover-white">Home</a>
+            <a href="https://piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="xlarge bar-item button hover-white">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="xlarge bar-item button hover-white">MarkUs</a>
+            <a href="Assignments.html" class="xlarge bar-item button hover-white">Assignments</a>
+            <a href="lectureslides.html" rel="slides" type="text/html" class="xlarge bar-item button hover-white">Slides</a>
+            <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
+            <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
+            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
+            <a href="feedback.html" class="xlarge bar-item button hover-white">Anon Feedback</a>
+            <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
+        </div>
+    </nav>
+
+    <!--small screen header open sidebar-->
+    <header class="container top hide-large blue-grey xlarge padding">
+        <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+        <span><b>Content List</b></span>
+    </header>
+
+    <!--small screen sidebar overlay content-->
+    <div class="overlay hide-large" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!--MAIN CONTENT-->
+    <div class="main" style="margin-left:300px; margin-top:40px;">
+        <!--Header-->
+        <div class="container blue-grey center" style="padding:100px">
+            <h1 class="margin jumbo"><b>CSCB20</b></h1>
+            <h1 class="xxxlarge text-indigo"><b>Course Website</b></h1>
+            <p class="xxlarge">Regrade Request</p>
+           </div>
+
+        <!-- Regrade Request Form -->
+        <div class="regrade" style="margin-top:50px; margin-bottom: 50px;">
+            <form action="{{ url_for('regrade_request', grade_id=grade_id) }}" method="POST">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Submit" class="button">
+            </form>
+        </div>
+    </div>
+
+    <footer class="main container xlarge blue-grey center" style="margin-left:300px">
+        <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+        <p>Site design by Qishen Chen, Luna Bertha</p>
+    </footer>
+
+    <script>
+        function open_sidebar() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function close_sidebar() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>
