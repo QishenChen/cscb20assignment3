@@ -31,7 +31,7 @@
             <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
             <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
             <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
-            <a href="feedback.html" class="xlarge bar-item button hover-white">Anon Feedback</a>
+            <a href="add_feedback" class="xlarge bar-item button hover-white">Anon Feedback</a>
             <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
         </div>
     </nav>
@@ -65,13 +65,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for grade in grades %}
+                {% for grade in student_grade %}
                 <tr>
                     <td>{{ grade.assignment_type }}</td>
                     <td>{{ grade.grade }}</td>
                     <td>
-                        <a href="regrade_request.html" class="xlarge bar-item button hover-white">Request regrade</a>
-
+                        <a href="{{url_for('regrade_request',grade_id=grade.id)}}" class="xlarge bar-item button hover-white">Request regrade</a>
                     </td>
                 </tr>
                 {% endfor %}

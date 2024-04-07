@@ -31,7 +31,7 @@
             <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
             <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
             <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
-            <a href="feedback.html" class="xlarge bar-item button hover-white">Anon Feedback</a>
+            <a href="add_feedback" class="xlarge bar-item button hover-white">Anon Feedback</a>
             <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
         </div>
     </nav>
@@ -46,7 +46,7 @@
     <div class="overlay hide-large" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
     <!-- Main content -->
-    <div class="main" style="margin-left:300px; margin-top:40px">
+    <div class="main" style="margin-left:300px; margin-top:200px">
         <!-- Grades Table -->
         <table id="grades-table">
             <thead>
@@ -73,6 +73,15 @@
                 {% endfor %}
             </tbody>
         </table>
+        <form action="{{ url_for('add_grade') }}" method="post">
+            <label for="student">Student</label>
+            <input type="text" name="student" placeholder="Student name">
+            <label for="assignment_type">Assignment</label>
+            <input type="text" name="assignment_type" placeholder="Assignment">
+            <label for="grade">Grade</label>
+            <input type="text" name="grade" placeholder="Grade">
+            <input type="submit" value="submit">
+        </form>
     </div>
         <!-- Footer -->
         <footer class="main container xlarge blue-grey center" style="margin-top:800px; margin-left: 300px;">

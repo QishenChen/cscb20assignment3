@@ -25,10 +25,11 @@
 <a href="login" class="dark-blue bar-item button padding-large hover-white xlarge">Login</a>
 <a href="register" class="dark-blue bar-item button padding-large hover-white xlarge">Register</a>
 {% if session['student_id'] %}
-    <a href="logout">click here to logout</a>
-    <a href="submit_assignment">click here to submit an assignment</a>
+    <a href="logout" class="dark-blue bar-item button padding-large hover-white xlarge">logout</a>
+    <a href="grade_view" class="dark-blue bar-item button padding-large hover-white xlarge">view all your grades</a>
 {% elif session['teacher_id'] %}
     <a href="regrade_request_view">click here to register</a>
+    <a href="logout" class="dark-blue bar-item button padding-large hover-white xlarge">logout</a>
     <a href="grade">click here to grade the assignments</a>
     <a href="feedback_view">click here to view feedback</a>
 {% endif %}

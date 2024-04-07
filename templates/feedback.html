@@ -30,7 +30,7 @@
             <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
             <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
             <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
-            <a href="feedback.html" class="xlarge bar-item button hover-white">Anon Feedback</a>
+            <a href="add_feedback" class="xlarge bar-item button hover-white">Anon Feedback</a>
             <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
         </div>
     </nav>
@@ -49,7 +49,7 @@
         <!-- Feedback form -->
    <!-- Feedback form -->
 <div class="form" style="margin-top: 150px;">
-    <form action="http://127.0.0.1:5000/feedback" method="post" class="container">
+    <form action="http://127.0.0.1:5000/add_feedback" method="post" class="container">
         <div class="top-row">
             <div class="field-wrap">
                 <label for="message_evaluation" class="xlarge">Type here for your evaluation of the course</label><br>
@@ -58,6 +58,10 @@
             <div class="field-wrap">
                 <label for="message_improvement" class="xlarge">Type here for your advice about possible course improvement</label><br>
                 <input type="text" id="message_improvement" name="message_improvement" class="xlarge" style="width:500px;">
+            </div>
+            <div class="field-wrap">
+                <label for="teacher" class="xlarge">Type here for the specific teacher to send feedback</label><br>
+                <input type="text" id="teacher" name="teacher" class="xlarge" style="width:500px;">
             </div>
         </div>
         <div class="field-wrap">

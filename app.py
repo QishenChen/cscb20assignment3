@@ -21,24 +21,6 @@ class Feedback(db.Model):
     def __repr__(self):
         return f"Feedback(id={self.id}, evaluation={self.message_evaluation}, improvement={self.message_improvement}, lab_advice={self.lab_advice})"
 
-@app.route('/feedback', methods=['GET', 'POST'])
-def add_feedback():
-    if request.method == 'POST':
-        message_evaluation = request.form['message_evaluation']
-        message_improvement = request.form['message_improvement']
-        lab_advice = request.form['lab_advice']
-        new_feedback = Feedback(message_evaluation=message_evaluation, message_improvement=message_improvement, lab_advice=lab_advice, teacher_id=session.get('teacher_id'))
-        db.session.add(new_feedback)
-        db.session.commit()
-        return redirect(url_for('add_feedback'))
-    return render_template('feedback.html')
-
-@app.route('/feedback_view', methods=['GET'])
-def feedback_view():
-    if session.get('teacher_id') is None:
-        return redirect(url_for('home'))
-    feedback_entries = Feedback.query.filter_by(teacher_id=session.get('teacher_id')).all()
-    return render_template('feedback_view.html', feedback_entries=feedback_entries)
 
 class grade(db.Model):
     __tablename__ = 'grade'
@@ -57,8 +39,8 @@ class user(db.Model):
     class_name = db.Column(db.String(100), nullable=False)
     grade = db.relationship('grade', backref='user', lazy=True)
 
-class regrade_request(db.Model):
-    __tablename__ = 'regrade_request'
+class regrade_request_model(db.Model):
+    __tablename__ = 'regrade_request_model'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
@@ -73,20 +55,21 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'GET':
+        return render_template('register.html')
     if request.method == 'POST':
         username = request.form['username']
         thispassword = request.form['password']
         class_name = request.form['class_name']
         hashed_password = bcrypt.generate_password_hash(thispassword).decode('utf-8')
         new_user = user(username=username, password=hashed_password, class_name=class_name)
-        if user.query.filter_by(username=username).scalar() is not None:
+        if user.query.filter_by(username=username).count() > 0:
             flash("Username already exists")
-            return redirect(url_for('register'))
-        db.session.add(new_user)
-        db.session.commit()
-        flash("Registration successful. Please log in.")
+        else:
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Registration successful. Please log in.")
         return redirect(url_for('login'))
-    return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -94,41 +77,55 @@ def login():
         username = request.form['username']
         password = request.form['password']
         logged_user = user.query.filter_by(username=username).first()
+        print(logged_user.id)
         if logged_user:
             if bcrypt.check_password_hash(logged_user.password, password):
                 if logged_user.class_name == 'student':
                     session['student_id'] = logged_user.id
                 else :
                     session['teacher_id'] = logged_user.id
-                return redirect(url_for('feedback'))
+            return redirect(url_for('home'))
         flash("Invalid username or password")
-    return render_template('login.html')
+    if request.method == 'GET':
+        if session.get('student_id') is not None or session.get('teacher_id') is not None:
+            return redirect(url_for('home'))
+        else:
+            return render_template('login.html')
 
-@app.route('/mainpage')
-def mainpage():
-    # Define your main page functionality here
-    return render_template('mainpage.html')
-
-@app.route('/feedback', methods=['GET', 'POST'])
+@app.route('/add_feedback', methods=['GET', 'POST'])
 def add_feedback():
     if request.method == 'POST':
         message_evaluation = request.form['message_evaluation']
         message_improvement = request.form['message_improvement']
         lab_advice = request.form['lab_advice']
-        new_feedback = feedback(message_evaluation=message_evaluation, message_improvement=message_improvement)
+        teacher=request.form['teacher']
+        teacher_id = user.query.filter_by(username=teacher).first().id
+        new_feedback = Feedback(message_evaluation=message_evaluation, message_improvement=message_improvement, lab_advice=lab_advice, teacher_id=teacher_id)
         db.session.add(new_feedback)
         db.session.commit()
         return redirect(url_for('add_feedback'))
     return render_template('feedback.html')
 
+@app.route('/feedback_view', methods=['GET'])
+def feedback_view():
+    if session.get('teacher_id') is None:
+        return redirect(url_for('home'))
+    feedback_entries = Feedback.query.filter_by(teacher_id=session.get('teacher_id')).all()
+    print(feedback_entries)
+    return render_template('feedback_view.html', feedback_entries=feedback_entries)
+@app.route('/mainpage')
+def mainpage():
+    # Define your main page functionality here
+    return render_template('mainpage.html')
+
 @app.route('/grade_view', methods=['GET', 'POST'])
 def view_grade():
     if request.method=='GET':
-        if session.get('teacher_id') is None:
+        if session.get('student_id') is None:
             return redirect(url_for('home'))
-        student_grade=grade.query.filter_by(id=session.get('student_id')).first()
+        student_grade=grade.query.filter_by(user_id=session.get('student_id')).all()
         return render_template('grade_view.html', student_grade=student_grade)
-
+# this page is designed for teacher to post students' grades for the first time
 @app.route('/grade', methods=['GET', 'POST'])
 def add_grade():
     if request.method == 'POST':
@@ -136,23 +133,24 @@ def add_grade():
             return redirect(url_for('home'))
         student=request.form['student']
         student_id = user.query.filter_by(username=student).first().id
-        grade = request.form['grade']
-        new_grade = grade(grade=grade, user_id=student_id)
+        thisgrade = request.form['grade']
+        assignment_type = request.form['assignment_type']
+        new_grade = grade(grade=thisgrade, user_id=student_id , assignment_type=assignment_type)
         db.session.add(new_grade)
         db.session.commit()
-        return redirect(url_for('change_grade'))
+        return redirect(url_for('home'))
     return render_template('grade.html')
 
-@app.route('/regrade_request/<grade_id>/', methods=['GET', 'POST'])
+@app.route('/regrade_request/<grade_id>', methods=['GET', 'POST'])
 def regrade_request(grade_id):
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
         message = request.form['message']
-        new_regrade_request = regrade_request(name=name, email=email, message=message, grade_id=grade_id)
+        new_regrade_request = regrade_request_model(name=name, email=email, message=message, grade_id=grade_id)
         db.session.add(new_regrade_request)
         db.session.commit()
-        return redirect(url_for('regrade_request'))
+        return redirect(url_for('view_grade'))
     return render_template('regrade_request.html',grade_id=grade_id)
 
 
@@ -183,16 +181,11 @@ def regrade_request_delete(regrade_request_id):
     db.session.commit()
     return redirect(url_for('regrade_request_view'))
 
-@app.route('/feedback_view', methods=['GET'])
-def feedback_view():
-    if session.get('teacher_id') is None:
-        return redirect(url_for('home'))
-    feedback=feedback.query.filter_by(teacher_id=session.get('teacher_id')).all()
-    return render_template('feedback_view.html', feedback=feedback)
 
 @app.route('/logout')
 def logout():
-    session.clear()
+    session.pop('student_id', None)
+    session.pop('teacher_id', None)
     return redirect(url_for('home'))
 
 
