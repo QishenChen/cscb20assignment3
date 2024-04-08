@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial scale=1">
+    <title>
+        CSCB20 Course Website
+    </title>
+    <link rel="stylesheet" type="text/css" href="../static/labs.css">
+</head>
+
+<body>
+    <header class="container-top">
+        <a href="#" class="button-right" onclick="open_side()">☰</a>
+        <span>Introduction to Web Development and Database</span>
+    </header>
+
+    <!--sidebar-->
+    <nav class="sidebar blue hover-blue collapse top large padding" id="mySidebar">
+        <div class="container">
+            <h3 class="padding-64"><b>Content<br>List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="index.html" onclick="close_side()" class="bar-item-button">Home</a>
+            <a href="https://www.piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="bar-item-button">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="bar-item-button">MarkUs</a>
+            <a href="Assignments.html" class="bar-item-button">Assignments</a>
+            <a href="lectureslides.html" rel="slides" type="text/html" class="bar-item-button">Slides</a>
+            <a href="labs.html" class="bar-item-button">Labs</a>
+            <a href="resources.html" class="bar-item-button">Resources</a>
+            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="bar-item-button">Syllabus</a>
+            <a href="feedback.html" class="bar-item-button">Anon Feedback</a>
+            <a href="CourseTeam.html" onclick="close_side()" class="bar-item-button">Course Team</a>
+        </div>
+    </nav>
+
+    <!--Overlay small screen-->
+    <div class="overlay" onclick="close_side()" title="close side menu" id="myOverlay"></div>
+
+    <!--Content-->
+    <div class="main">
+        <div class="container" id="online" >
+            <h1 class="big-1"><b>Online resource</b></h1>
+            <hr class="round">
+            <ul>
+                <li>
+                    <a href="index.html"> <b>Course Website</b></a>
+                    <p>
+                        Course information, lecture notes, tutorial material, important announcements, etc. will be posted on the course website. It is your responsibility to visit it frequently.
+                    </p>
+                </li>
+                <li>Beginner link for <a href="http://code.tutsplus.com/tutorials/sql-for-beginners--net-8200">MySQL</a></li>
+                <li>
+                    <a href="https://piazza.com"> <b>Discussion board</b></a>
+                    <p>You are encouraged to use the bulletin board to discuss the course material, pose questions on the assignments, etc.
+                         The bulletin board will be monitored by the instructor and by your TAs. Please, be very careful not to reveal (parts of) your solution on the bulletin board.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="container" id="online" >
+            <h1 class="big-1"><b>Software and documentation</b></h1>
+            <hr class="round">
+            <ul>
+                <li>
+                    <ol>
+                        <li>Mac OS comes with the application "terminal". Simple click on it to run. Login to mathlab by typing <br> <code> utorid@mathlab.utsc.utoronto.ca.</code> Enter your password</li>
+                        <li>Windows - you will need a SSH client. PuTTY is a good free one. You can download and install here:</li>
+                    </ol>
+                    <ol>
+                        Windows - you will need a SSH client. PuTTY is a good free one. You can download and install here: <br> <a href="http://www.putty.org/">PuTTY</a>Use the same command as above to login to mathlab:
+                        <code> utorid@mathlab.utsc.utoronto.ca.</code>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <footer>
+        <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+        <p>Site design by Qishen Chen, Luna Bertha</p>
+    </footer>
+    <script>
+        function open_side() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function close_side() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial scale=1">
+    <title>
+        CSCB20 Course Website
+    </title>
+    <link rel="stylesheet" type="text/css" href="../static/labs.css">
+</head>
+
+<body>
+    <header class="container-top">
+        <a href="#" class="button-right" onclick="open_side()">☰</a>
+        <span>Introduction to Web Development and Database</span>
+        <a href="#" class="button-right" onclick="close_side()">Close Menu</a>
+    </header>
+
+    <!--sidebar-->
+    <nav class="sidebar blue hover-blue collapse top large padding" id="mySidebar">
+        <a class="active" href="#home" onclick="close_side()">Close Menu</a>
+        <div class="container">
+            <h3 class="padding-64"><b>Content<br>List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="index.html" onclick="close_side()" class="bar-item-button">Home</a>
+            <a href="https://www.piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="bar-item-button">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="bar-item-button">MarkUs</a>
+            <a href="Assignments.html" class="bar-item-button">Assignments</a>
+            <a href="lectureslides.html" rel="slides" type="text/html" class="bar-item-button">Slides</a>
+            <a href="labs.html" class="bar-item-button">Labs</a>
+            <a href="resources.html" class="bar-item-button">Resources</a>
+            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="bar-item-button">Syllabus</a>
+            <a href="feedback.html" class="bar-item-button">Anon Feedback</a>
+            <a href="CourseTeam.html" onclick="close_side()" class="bar-item-button">Course Team</a>
+        </div>
+    </nav>
+
+    <!--Overlay small screen-->
+    <div class="overlay" onclick="close_side()" title="close side menu" id="myOverlay"></div>
+
+    <!--Content-->
+    <div class="main">
+        <!--Header-->
+        <div class="container" id="showcase">
+            <h1 class="big-1"><b>Labs</b></h1>
+        </div>
+        <div class="container" id="showcase">
+            <table>
+                 <tr>
+                    <th>Week</th>
+                    <th>Link</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t1/">Python introduction</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t2/">handout</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t3/">handout</a>
+                    </td>
+                    <td><a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t3/query_solns.html">query_solns</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t4/">handout</a>
+                    </td>
+                    <td><a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t4/tut4_soln.pdf">solns</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t5/">handout</a>
+                    </td>
+                    <td><a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t5/t5_soln.pdf">solns</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <a href="https://www.utsc.utoronto.ca/~bretscher/b20/tutorials/t6/">handout</a>
+                    </td>
+                </tr>
+            </table>
+           
+        </div>
+    </div>
+
+    
+    <footer>
+        <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+        <p>Site design by Qishen Chen, Luna Bertha</p>
+    </footer>
+
+    <script>
+        function open_side() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function close_side() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+    </script>
+
+
+</body>
+
+</html>
+
+

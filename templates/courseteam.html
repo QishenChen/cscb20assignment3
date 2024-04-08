@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Team</title>
+    <link rel="stylesheet" type="text/css" href="../static/CourseTeam.css">
+
+
+</head>
+
+<body>
+    <header class="container-top">
+        <a href="#" class="button-right" onclick="open_side()">☰</a>
+        <span>Introduction to Web Development and Database</span>
+        <a href="#" class="button-right" onclick="close_side()">Close Menu</a>
+    </header>
+
+    <!--sidebar-->
+    <nav class="sidebar blue hover-blue collapse top large padding" id="mySidebar">
+        <a class="active" href="#home" onclick="close_side()">Close Menu</a>
+        <div class="container">
+            <h3 class="padding-64"><b>Content<br>List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="index.html" class="bar-item-button">Home</a>
+            <a href="https://piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="bar-item-button">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="bar-item-button">MarkUs</a>
+            <a href="Assignments.html" class="bar-item-button">Assignments</a>
+            <a href="lectureslides.html" rel="slides" type="text/html" class="bar-item-button">Slides</a>
+            <a href="labs.html" class="bar-item-button">Labs</a>
+            <a href="resources.html" class="bar-item-button">Resources</a>
+            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="bar-item-button">Syllabus</a>
+            <a href="feedback.html" class="bar-item-button">Anon Feedback</a>
+            <a href="#" onclick="close_side()" class="bar-item-button">Course Team</a>
+        </div>
+    </nav>
+
+    <!--Overlay small screen-->
+    <div class="overlay" onclick="close_side()" title="close side menu" id="myOverlay"></div>
+
+    <!--Content-->
+    <div class="main">
+        <!--Header-->
+        <div class="container" id="showcase">
+            <h1 class="big-1"><b>CSCB20</b></h1>
+            <h1 class="big-2"><b>Course Website</b>
+            </h1>
+            <hr class="round">
+            <p> This is the course website for CSCB20, a course on web development and SQL at the University of
+                Toronto
+                Scarborough Campus. </p>
+        </div>
+    </div>
+
+    <div>
+        <button class="openbtn" onclick="open_side()">☰ Open Menu</button>
+    </div>
+    <h2>Course Team</h2>
+
+    <div class="instructor-info team-member left">
+        <div class="grid-container">
+            <div class="grid-item">
+                <strong>Instructor:</strong> Purva Gawde (Mon 9 to 11)
+            </div>
+            <div class="grid-item">
+                <strong>Office Hours:</strong> Tuesday 12 to 1
+            </div>
+        </div>
+    </div>
+
+    <div class="ta-oh-info team-member left">
+        <strong>TA and OHs:</strong>
+        <ul>
+            <li>Joshua Concon: Wednesday 15:00-16:00</li>
+            <li>Pourya Moghadam: Monday (11:00 – 12:00) or (13:00 – 14:00)</li>
+            <li>Danny Chen: Friday 12:00 to 13:00</li>
+            <li>Nisha Rajendran: Wednesday 10.00am - 11.00am</li>
+            <li>Navinn Ravindaran: Friday 11 to 12</li>
+        </ul>
+    </div>
+
+    <div class="ta-tut-info team-member left">
+        <strong>TA and Tutorials:</strong>
+        <div class="grid-container">
+            <div class="grid-item">
+                <strong>TUT0001</strong><br>
+                MO<br>
+                12:00 - 13:00<br>
+                Pourya Moghadam
+            </div>
+            <div class="grid-item">
+                <strong>TUT0002</strong><br>
+                WE<br>
+                11:00 - 12:00<br>
+                Nisha Rajendran
+            </div>
+            <div class="grid-item">
+                <strong>TUT0003</strong><br>
+                WE<br>
+                14:00 - 15:00<br>
+                Joshua Concon
+            </div>
+            <div class="grid-item">
+                <strong>TUT0005</strong><br>
+                FR<br>
+                10:00 - 11:00<br>
+                Navinn Ravindaran
+            </div>
+            <div class="grid-item">
+                <strong>TUT0006</strong><br>
+                FR<br>
+                13:00 - 14:00<br>
+                Danny Chen
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+    <p>Site design by Qishen Chen, Luna Bertha</p>
+</footer>
+
+<script>
+    function open_side() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function close_side() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+</script>
+
+
+
+</html>
