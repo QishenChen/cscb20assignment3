@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Grades</title>
+    <link rel="stylesheet" href="../static/sections/sidebar.css">
+    <link rel="stylesheet" href="../static/components/buttons.css">
+    <link rel="stylesheet" href="../static/sections/grade.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="container top blue-grey xlarge padding">
+        <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+        <span><b>Introduction to Web Development</b></span>
+    </header>
+
+    <!-- Sidebar -->
+    <nav class="sidebar blue-grey collapse top large padding" style="z-index:3;width:300px;font-weight:bold;margin-top:60px" id="mySidebar">
+        <br>
+        <a href="javascript:void(0)" onclick="close_sidebar();" class="button hide-large display-topleft" style="width:100%;font-size: 22px">Close Menu</a>
+        <div class="container">
+            <h3 class="padding-32 xxlarge"><b>Content List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="#" onclick="close_sidebar()" class="xlarge bar-item button hover-white">Home</a>
+            <a href="https://piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="xlarge bar-item button hover-white">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="xlarge bar-item button hover-white">MarkUs</a>
+            <a href="{{ url_for('add_grade') }}" class="xlarge bar-item button hover-white">Grading</a>
+            <a href="{{url_for('feedback_view')}}" class="xlarge bar-item button hover-white">Feedback viewing</a>
+        </div>
+    </nav>
+
+    <!-- Small screen header open sidebar -->
+    <header class="container top hide-large blue-grey xlarge padding">
+        <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+        <span><b>Content List</b></span>
+    </header>
+
+    <!-- Small screen sidebar overlay content -->
+    <div class="overlay hide-large" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- Main content -->
+    <div class="main" style="margin-left:300px; margin-top:200px">
+        <!-- Grades Table -->
+        <table id="grades-table">
+            <thead>
+                <tr>
+                    <th>Teaching style review</th>
+                    <th>Course delivery improvement</th>
+                    <th>Students' evaluation of labs</th>
+                    <th>Lab improvement advice</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedback_entries %}
+                <tr>
+                    <td>{{ feedback.message_evaluation }}</td>
+                    <td>{{ feedback.message_improvement }}</td>
+                    <td>{{ feedback.lab_evaluation }}</td>
+                    <td>{{feedback.lab_advice}}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        <!-- Footer -->
+        <footer class="main container xlarge blue-grey center" style="margin-top:800px; margin-left: 300px;">
+            <a href="https://web.cs.toronto.edu">Faculty of Computer Science at UofT</a>
+            <p>Site design by Qishen Chen, Luna Bertha</p>
+        </footer>
+    
+
+    <script>
+        function open_sidebar() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function close_sidebar() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>

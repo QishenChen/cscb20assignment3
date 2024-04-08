@@ -26,13 +26,8 @@
             <a href="#" onclick="close_sidebar()" class="xlarge bar-item button hover-white">Home</a>
             <a href="https://piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="xlarge bar-item button hover-white">Piazza</a>
             <a href="https://markus2.utsc.utoronto.ca/" class="xlarge bar-item button hover-white">MarkUs</a>
-            <a href="Assignments.html" class="xlarge bar-item button hover-white">Assignments</a>
-            <a href="lectureslides.html" rel="slides" type="text/html" class="xlarge bar-item button hover-white">Slides</a>
-            <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
-            <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
-            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
-            <a href="add_feedback" class="xlarge bar-item button hover-white">Anon Feedback</a>
-            <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
+            <a href="{{ url_for('add_grade') }}" class="xlarge bar-item button hover-white">Grading</a>
+            <a href="{{url_for('feedback_view')}}" class="xlarge bar-item button hover-white">Feedback viewing</a>
         </div>
     </nav>
 
@@ -51,7 +46,7 @@
         <table id="grades-table">
             <thead>
                 <tr>
-                    <th>Student ID</th>
+                    <th>Student</th>
                     <th>Assignment Type</th>
                     <th>Grade</th>
                     <th>Action</th>
@@ -60,7 +55,7 @@
             <tbody>
                 {% for grade in grades %}
                 <tr>
-                    <td>{{ grade.student_id }}</td>
+                    <td>{{ grade.student }}</td>
                     <td>{{ grade.assignment_type }}</td>
                     <td>{{ grade.grade }}</td>
                     <td>
@@ -103,3 +98,5 @@
     </script>
 </body>
 </html>
+
+

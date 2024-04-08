@@ -17,7 +17,7 @@ class Feedback(db.Model):
     message_improvement = db.Column(db.String(500), nullable=False)
     lab_advice = db.Column(db.String(500), nullable=False)
     teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    lab_evaluation = db.Column(db.String(100), nullable=False)
     def __repr__(self):
         return f"Feedback(id={self.id}, evaluation={self.message_evaluation}, improvement={self.message_improvement}, lab_advice={self.lab_advice})"
 
@@ -26,6 +26,7 @@ class grade(db.Model):
     __tablename__ = 'grade'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    student = db.Column(db.String(100), nullable=False)
     assignment_type = db.Column(db.String(100), nullable=False)  # Type of assignment (e.g., assignment, lab, midterm, final)
     grade = db.Column(db.String(100), nullable=False)
     remark_request = db.Column(db.Boolean, default=False)  # True if remark request has been submitted
@@ -98,9 +99,10 @@ def add_feedback():
         message_evaluation = request.form['message_evaluation']
         message_improvement = request.form['message_improvement']
         lab_advice = request.form['lab_advice']
+        lab_evaluation = request.form['lab_evaluation']
         teacher=request.form['teacher']
         teacher_id = user.query.filter_by(username=teacher).first().id
-        new_feedback = Feedback(message_evaluation=message_evaluation, message_improvement=message_improvement, lab_advice=lab_advice, teacher_id=teacher_id)
+        new_feedback = Feedback(message_evaluation=message_evaluation, message_improvement=message_improvement, lab_advice=lab_advice, teacher_id=teacher_id, lab_evaluation=lab_evaluation)
         db.session.add(new_feedback)
         db.session.commit()
         return redirect(url_for('add_feedback'))
@@ -111,7 +113,6 @@ def feedback_view():
     if session.get('teacher_id') is None:
         return redirect(url_for('home'))
     feedback_entries = Feedback.query.filter_by(teacher_id=session.get('teacher_id')).all()
-    print(feedback_entries)
     return render_template('feedback_view.html', feedback_entries=feedback_entries)
 @app.route('/mainpage')
 def mainpage():
@@ -124,7 +125,7 @@ def view_grade():
         if session.get('student_id') is None:
             return redirect(url_for('home'))
         student_grade=grade.query.filter_by(user_id=session.get('student_id')).all()
-        return render_template('grade_view.html', student_grade=student_grade)
+        return render_template('grade_view.html', student_grade=student_grade, student=user.query.filter_by(id=session.get('student_id')).first().username)
 # this page is designed for teacher to post students' grades for the first time
 @app.route('/grade', methods=['GET', 'POST'])
 def add_grade():
@@ -135,11 +136,11 @@ def add_grade():
         student_id = user.query.filter_by(username=student).first().id
         thisgrade = request.form['grade']
         assignment_type = request.form['assignment_type']
-        new_grade = grade(grade=thisgrade, user_id=student_id , assignment_type=assignment_type)
+        new_grade = grade(grade=thisgrade, user_id=student_id , assignment_type=assignment_type, student=student)
         db.session.add(new_grade)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('grade.html')
+    return render_template('grade.html', grades=grade.query.all())
 
 @app.route('/regrade_request/<grade_id>', methods=['GET', 'POST'])
 def regrade_request(grade_id):
@@ -155,15 +156,14 @@ def regrade_request(grade_id):
 
 
 @app.route('/change_grade/<grade_id>', methods=['GET', 'POST'])
-def change_grade():
+def change_grade(grade_id):
     if request.method == 'POST':
         if session.get('teacher_id') is None:
             return redirect(url_for('home'))
-        grade_id = request.form['grade_id']
         new_grade = request.form['new_grade']
         grade.query.filter_by(id=grade_id).update(dict(grade=new_grade))
         db.session.commit()
-        return redirect(url_for('change_grade'))
+        return redirect(url_for('add_grade'))
     return render_template('change_grade.html')
 
 @app.route('/regrade_request_view', methods=['GET'])

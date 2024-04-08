@@ -52,11 +52,11 @@
     <form action="http://127.0.0.1:5000/add_feedback" method="post" class="container">
         <div class="top-row">
             <div class="field-wrap">
-                <label for="message_evaluation" class="xlarge">Type here for your evaluation of the course</label><br>
+                <label for="message_evaluation" class="xlarge">What do you like about the instructor teaching?</label><br>
                 <input type="text" id="message_evaluation" name="message_evaluation" class="xlarge" style="width:500px;">
             </div>
             <div class="field-wrap">
-                <label for="message_improvement" class="xlarge">Type here for your advice about possible course improvement</label><br>
+                <label for="message_improvement" class="xlarge">What do you recommend the instructor to do to improve their teaching?</label><br>
                 <input type="text" id="message_improvement" name="message_improvement" class="xlarge" style="width:500px;">
             </div>
             <div class="field-wrap">
@@ -65,7 +65,11 @@
             </div>
         </div>
         <div class="field-wrap">
-            <label for="lab_advice" class="xlarge">What do you like about the labs?</label><br>
+            <label for="lab_evaluation" class="xlarge">What do you like about the labs?</label><br>
+            <input type="text" id="lab_evaluation" name="lab_evaluation" class="xlarge" style="width:500px;">
+        </div>
+        <div class="field-wrap">
+            <label for="lab_advice" class="xlarge">What do you recommend the lab instructors to do to improve their labs?</label><br>
             <input type="text" id="lab_advice" name="lab_advice" class="xlarge" style="width:500px;">
         </div>
         <input type="submit" value="Submit" class="xlarge custom-btn btn-1" style="width:500px;">

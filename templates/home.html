@@ -18,6 +18,32 @@
 <!--header-->
 <header class="xlarge container-top" style="padding:35px">
   <span>Introduction to Web Development and database</span>
+{% if session['student_id'] %}
+      <nav class="sidebar blue-grey collapse top large padding" style="z-index:3;width:300px;font-weight:bold;margin-top:60px" id="mySidebar"><br>
+        <a href="javascript:void(0)" onclick="close_sidebar();" class="button hide-large display-topleft" style="width:100%;font-size: 22px">Close Menu</a>
+        <div class="container">
+            <h3 class="padding-32 xxlarge"><b>Content List</b></h3>
+        </div>
+        <div class="bar-block">
+            <a href="#" onclick="close_sidebar()" class="xlarge bar-item button hover-white">Home</a>
+            <a href="https://piazza.com/utoronto.ca/winter2024/cscb20h3sLinks" class="xlarge bar-item button hover-white">Piazza</a>
+            <a href="https://markus2.utsc.utoronto.ca/" class="xlarge bar-item button hover-white">MarkUs</a>
+            <a href="Assignments.html" class="xlarge bar-item button hover-white">Assignments</a>
+            <a href="lectureslides.html" rel="slides" type="text/html" class="xlarge bar-item button hover-white">Slides</a>
+            <a href="labs.html" class="xlarge bar-item button hover-white">Labs</a>
+            <a href="resources.html" class="xlarge bar-item button hover-white">Resources</a>
+            <a href="https://www.utsc.utoronto.ca/~bretscher/b20/syllabus.pdf" class="xlarge bar-item button hover-white">Syllabus</a>
+            <a href="add_feedback" class="xlarge bar-item button hover-white">Anon Feedback</a>
+            <a href="CourseTeam.html" class="xlarge bar-item button hover-white">Course Team</a>
+        </div>
+    </nav>
+
+    <!--small screen header open sidebar-->
+    <header class="container top hide-large blue-grey xlarge padding">
+        <a href="javascript:void(0)" class="button blue-grey margin-right" onclick="open_sidebar()">☰</a>
+        <span><b>Content List</b></span>
+    </header>
+    {% endif %}
 </header>
 <header class="container blue-grey center" style="padding:200px 16px">
 <h1 class="margin jumbo">CSCB20</h1>
@@ -28,10 +54,9 @@
     <a href="logout" class="dark-blue bar-item button padding-large hover-white xlarge">logout</a>
     <a href="grade_view" class="dark-blue bar-item button padding-large hover-white xlarge">view all your grades</a>
 {% elif session['teacher_id'] %}
-    <a href="regrade_request_view">click here to register</a>
     <a href="logout" class="dark-blue bar-item button padding-large hover-white xlarge">logout</a>
-    <a href="grade">click here to grade the assignments</a>
-    <a href="feedback_view">click here to view feedback</a>
+    <a href="grade" class="dark-blue bar-item button padding-large hover-white xlarge">click here to grade the assignments</a>
+    <a href="feedback_view"  class="dark-blue bar-item button padding-large hover-white xlarge">click here to view feedback</a>
 {% endif %}
 </header>
 
@@ -39,6 +64,9 @@
     <!--Content-->
     <div class="main">
       <!--Header-->
+      
+    <!--small screen sidebar overlay content-->
+    <div class="overlay hide-large" onclick="close_sidebar()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
       <div class="container" id="showcase">
           <h1 class="xxlarge"><b>CSCB20</b></h1>
           <h1 class="xlarge"><b>Course Website</b>
